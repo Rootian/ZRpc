@@ -1,4 +1,4 @@
-package com.rootian.orderservice;
+package com.work.orderservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

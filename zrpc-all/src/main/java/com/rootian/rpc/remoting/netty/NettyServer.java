@@ -1,5 +1,7 @@
 package com.rootian.rpc.remoting.netty;
 
+import com.rootian.rpc.remoting.Codec;
+import com.rootian.rpc.remoting.Handler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -23,7 +25,7 @@ public class NettyServer implements Server {
     EventLoopGroup worker = new NioEventLoopGroup();
 
     @Override
-    public void start(URI uri) {
+    public void start(URI uri, Codec codec, Handler handler) {
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(boss, worker)
@@ -32,7 +34,9 @@ public class NettyServer implements Server {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new NettyHandler());
+                            ch.pipeline().addLast(new NettyCodecHandler(codec));
+                            ch.pipeline().addLast(new NettyProcessHandler(handler));
+
                         }
                     });
             ChannelFuture future = bootstrap.bind().sync();

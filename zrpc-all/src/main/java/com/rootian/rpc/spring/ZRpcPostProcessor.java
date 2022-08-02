@@ -1,7 +1,7 @@
 package com.rootian.rpc.spring;
 
 import com.rootian.rpc.annotation.ZRpcService;
-import com.rootian.rpc.common.SpiUtils;
+import com.rootian.rpc.common.tools.SpiUtils;
 import com.rootian.rpc.config.ProtocolConfig;
 import com.rootian.rpc.config.RegistryConfig;
 import com.rootian.rpc.remoting.Transporter;
@@ -9,9 +9,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 
 /**
  * @Description: spring启动时扫描其中带有ZRpcservice的类，并进行服务注册
@@ -34,11 +31,11 @@ public class ZRpcPostProcessor implements ApplicationContextAware, Instantiation
             ProtocolConfig protocolConfig = context.getBean(ProtocolConfig.class);
             Transporter transporter = (Transporter) SpiUtils.getServiceImpl(protocolConfig.getTransporter(), Transporter.class);
 
-            try {
-                transporter.start(new URI("xxx://127.0.0.1:8080/"));
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                transporter.start(new URI("xxx://127.0.0.1:8080/"));
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
 
         }
 

@@ -10,6 +10,6 @@ import java.net.URI;
 
 public class NettyServerTest {
     public static void main(String[] args) {
-        new Netty4Transporter().start(URI.create("zrpc://127.0.0.1:8081"));
+//        new Netty4Transporter().start(URI.create("zrpc://127.0.0.1:8081"));
     }
 }

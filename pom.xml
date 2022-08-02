@@ -7,7 +7,7 @@
     <groupId>com.rootian.rpc</groupId>
     <artifactId>zrpc</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>service-common</module>
         <module>zrpc-all</module>

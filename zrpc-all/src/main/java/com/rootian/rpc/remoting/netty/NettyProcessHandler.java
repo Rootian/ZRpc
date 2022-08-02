@@ -1,5 +1,6 @@
 package com.rootian.rpc.remoting.netty;
 
+import com.rootian.rpc.remoting.Handler;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -8,10 +9,15 @@ import io.netty.channel.ChannelHandlerContext;
  * @Author Rootian
  * @Date 2022-07-30
  */
-public class NettyHandler extends ChannelDuplexHandler {
+public class NettyProcessHandler extends ChannelDuplexHandler {
 
+    private Handler handler;
+
+    public NettyProcessHandler(Handler handler) {
+        this.handler = handler;
+    }
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("传输内容: " + msg);
+        handler.OnReceive(new NettyChannel(ctx.channel()), msg);
     }
 }

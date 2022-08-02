@@ -10,5 +10,5 @@ import java.net.URI;
  * @return
  */
 public interface Transporter {
-    Server start(URI uri);
+    Server start(URI uri, Codec codec, Handler handler);
 }
