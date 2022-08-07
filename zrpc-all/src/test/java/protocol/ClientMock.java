@@ -36,22 +36,25 @@ public class ClientMock {
         buffer.writeByte(0xda);
         buffer.writeByte(0xbb);
         buffer.writeBytes(ByteUtil.int2bytes(body.length));
+        buffer.writeBytes(body);
 
 
         SocketChannel channel = SocketChannel.open();
-        channel.connect(new InetSocketAddress("127.0.0.1", 8080));
+        channel.connect(new InetSocketAddress("10.34.6.225", 10088));
 //        ByteBuffer out = ByteBuffer.wrap(buffer.array());
         ByteBuffer out = buffer.nioBuffer();
         channel.write(out);
-        Thread.sleep(5000);
-        buffer.clear();
-        buffer.writeBytes(body);
-        channel.write(ByteBuffer.wrap(buffer.array()));
+//        Thread.sleep(5000);
+//        buffer.clear();
+//        buffer.writeBytes(body);
+//        channel.write(ByteBuffer.wrap(buffer.array()));
 
         ByteBuffer response = ByteBuffer.allocate(1025);
         channel.read(response);
         System.out.println("响应内容");
         System.out.println(new String(response.array()));
+
+
     }
 
 

@@ -1,5 +1,7 @@
 package com.rootian.rpc.core.protocol;
 
+import com.rootian.rpc.core.Invoker;
+
 import java.net.URI;
 
 /**
@@ -9,5 +11,5 @@ import java.net.URI;
  */
 public interface Protocol {
 
-    public void export(URI exportUri);
+    void export(URI exportUri, Invoker invoker);
 }

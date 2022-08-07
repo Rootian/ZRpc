@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Description 提供ZRpc服务
+ * @Description 标记该类提供ZRpc服务
  * @Author Rootian
  * @Date 2022-07-30
  * @param: null
@@ -19,5 +19,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Service
 public @interface ZRpcService {
-
+    Class<?> interfaceClass() default void.class;
 }

@@ -2,8 +2,10 @@ package com.rootian.rpc.remoting.netty;
 
 import com.rootian.rpc.remoting.Codec;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelPromise;
 
 import java.util.List;
 
@@ -41,8 +43,21 @@ public class NettyCodecHandler extends ChannelDuplexHandler {
         for (Object o : out) {
             ctx.fireChannelRead(o);
         }
-        System.out.println("NettyCodecHandler 接受数据请求 : " + msg);
+    }
 
-
+    /**
+     * @Description 出栈事件
+     * @Author Rootian
+     * @Date 2022-08-07
+     * @param: ctx
+     * @param: msg
+     * @param: promise
+     * @return void
+     */
+    @Override
+    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+        System.out.println("经过codec管道");
+        byte[] encode = codec.encode(msg);
+        super.write(ctx, Unpooled.wrappedBuffer(encode), promise);
     }
 }

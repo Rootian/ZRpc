@@ -45,7 +45,18 @@ public class ZRpcCodec implements Codec {
 
     @Override
     public byte[] encode(Object msg) throws Exception {
-        return new byte[0];
+
+        byte[] responseBody = (byte[])msg;
+        // 构建header
+        ByteBuf buffer = Unpooled.buffer();
+        buffer.writeByte(0xda);
+        buffer.writeByte(0xbb);
+        buffer.writeBytes(ByteUtil.int2bytes(responseBody.length));
+        buffer.writeBytes(responseBody);
+
+        byte[] result = new byte[buffer.readableBytes()];
+        buffer.readBytes(result);
+        return result;
     }
 
     /**
